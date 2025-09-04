@@ -1,0 +1,136 @@
+{% load static %}
+<html>
+<head>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                 
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        
+                        {% include "adminhod_templates/notification.html" %}
+                        
+                       
+
+                       
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-dark-600 small font-weight-bold">{{ request.user.username }} </span>
+
+                               
+    <img class="img-profile rounded-circle" src="{% static "defaultprofilepicture.png" %}"   alt="...">
+
+   
+                            </a>
+
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/logout_user" id="messagesDropdown" role="button"
+                            data-toggle="modal" aria-haspopup="true" aria-expanded="false" data-target="#logoutModal">
+                            <i class="fas fa-door-open fa-door-open"></i></a>
+                        </li>
+
+                    </ul>
+
+                </nav>
+<!-- ... Autres balises <head> ... -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function updateNotificationsCounter(count) {
+                if (count > 0) {
+                    $('#notifications-counter').text(count);
+                    $('#notifications-counter').show();
+                } else {
+                    $('#notifications-counter').hide();
+                }
+            }
+    
+            function updateNotificationsList(notifications) {
+                var $list = $('.notifications-list');
+                $list.empty();
+    
+                if (notifications.length > 0) {
+                    notifications.forEach(function(notification) {
+                        $list.append('<li>' + notification.message + '</li>');
+                    });
+                } else {
+                    $list.append('<li>No new notifications.</li>');
+                }
+            }
+    
+            function fetchNotifications() {
+                $.ajax({
+                    url: '/get_notifications/',  // Assurez-vous que cette URL est correcte et gérée par une vue Django
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        updateNotificationsCounter(response.notifications.length);
+                        updateNotificationsList(response.notifications);
+                    },
+                    error: function(error) {
+                        console.error('Error fetching notifications:', error);
+                    }
+                });
+            }
+    
+            fetchNotifications();
+            setInterval(fetchNotifications, 5000);
+    
+            // Fonction pour marquer les notifications comme lues
+            function markNotificationsAsRead() {
+                $.ajax({
+                    url: '/mark_notifications_as_read/',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        // Gérer la réponse si nécessaire
+                    },
+                    error: function(xhr, status, error) {
+                        // Gérer les erreurs si nécessaire
+                    }
+                });
+            }
+    
+            // Attacher la fonction au clic sur l'icône de notification
+            $('#alertsDropdown, .fa-bell').click(function() {
+                markNotificationsAsRead();
+            });
+        });
+    </script>
+                </body>
+                </html>

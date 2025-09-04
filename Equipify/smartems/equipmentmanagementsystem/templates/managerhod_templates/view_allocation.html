@@ -1,0 +1,55 @@
+{% extends "managerhod_templates/base_template.html" %}
+{% block page_title %}
+   Equipment Allocation List
+{% endblock page_title %}
+{% block main_content %}
+<div class="container-fluid">
+    <div class="container">
+   
+         
+                       <div class="card shadow mb-4">
+                           
+                           <div class="card-header py-3">
+                               <h6 class="m-0 font-weight-bold text-primary">Equipments Allocation List</h6>
+                           </div>
+                           <div class="card-body">
+                               <div class="table-responsive">
+                                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                       <thead>
+            <tr>
+                <th>Id</th>
+                <th>Allocator</th>
+                <th>Equipment</th>
+                <th>DateTime</th>
+                <th>Deadline</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipment_allocation in equipment_allocations %}
+            <tr>
+                <td>{{ equipment_allocation.id }}</td>
+                <td>{{ equipment_allocation.allocator.fullname }}</td>
+                <td>{{ equipment_allocation.equipment.name }}</td>
+                <td>{{ equipment_allocation.start_datetime }}</td>
+                <td>{{ equipment_allocation.end_datetime }}</td>
+                
+                     
+                 </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+{% endblock main_content %}

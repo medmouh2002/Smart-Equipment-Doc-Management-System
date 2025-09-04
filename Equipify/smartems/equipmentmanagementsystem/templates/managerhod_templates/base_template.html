@@ -1,0 +1,264 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Manager Session</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static "vendor/fontawesome-free/css/all.min.css" %}"  rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+        <script src="https://kit.fontawesome.com/4bf42051d0.js" crossorigin="anonymous"></script>
+    <!-- Custom styles for this template-->
+    <link href="{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+  
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        {% include "managerhod_templates/sidebar_template.html" %}
+        <!-- End of Sidebar -->
+
+    
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                {% include "managerhod_templates/topbar_template.html" %}
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                {% block main_content %}             {% endblock main_content %}
+                <!-- End of Main Content -->
+
+           
+
+        </div>
+       
+
+    </div>
+    
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+  
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/logout_user">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static "vendor/jquery-easing/jquery.easing.min.js" %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static "js/sb-admin-2.min.js" %}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static "vendor/chart.js/Chart.min.js" %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static "js/demo/chart-area-demo.js" %}"></script>
+    <script src="{% static "js/demo/chart-pie-demo.js" %}"></script>
+
+    <script>
+    
+        const barChartData = {
+          labels: ['Equipments', 'Students', 'Researchers', 'Allocations'],
+          datasets: [{
+            label: 'Count',
+            data: [{{ equipment_count }}, {{ student_count }}, {{ researcher_count }}, {{ allocation_count }}],
+            backgroundColor: [
+              'rgba(46, 204, 113, 0.8)', // green
+              'rgba(230, 126, 34, 0.8)', // orange
+              'rgba(155, 89, 182, 0.8)', // purple
+              'rgba(149, 165, 166, 0.8)' // grey
+            ],
+            borderColor: [
+              'rgba(46, 204, 113, 1)', // green
+              'rgba(230, 126, 34, 1)', // orange
+              'rgba(155, 89, 182, 1)', // purple
+              'rgba(149, 165, 166, 1)' // grey
+            ],
+            borderWidth: 2
+          }]
+        };
+      
+        var ctx = document.getElementById('barChart2').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: barChartData,
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  max: 50,
+                  stepSize: 10
+                }
+              }]
+            }
+          }
+        });
+      </script>
+
+<script>
+
+    const pieChartData = {
+      labels: ['Students', 'Researchers'],
+      datasets: [{
+        label: '# of Items',
+        data: [{{ student_count }}, {{ researcher_count }}],
+        backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 206, 86)'],
+        hoverOffset: 4
+      }]
+    };
+  
+
+    const pieChartConfig = {
+      type: 'pie',
+      data: pieChartData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Pie Chart'
+          },
+          datalabels: {
+            display: true,
+            color: '#fff',
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    };
+  
+   
+    const pieChartCtx = document.getElementById('mypieChart2').getContext('2d');
+    const pieChart = new Chart(pieChartCtx, pieChartConfig);
+  </script>
+
+
+<script>
+
+    const doughnutChartData = {
+      labels: ['Equipments', 'Allocations'],
+      datasets: [{
+        label: '# of Items',
+        data: [{{ equipment_count }}, {{ allocation_count }}],
+        backgroundColor: ['rgb(255, 99, 71)', 'rgb(139, 69, 19)'],
+        hoverOffset: 4
+      }]
+    };
+  
+  
+    const doughnutChartConfig = {
+      type: 'doughnut',
+      data: doughnutChartData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Equipment and Allocation Count'
+          },
+          datalabels: {
+            display: true,
+            color: '#000',
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    };
+  
+
+    const doughnutChartCtx = document.getElementById('mydoughnutChart2').getContext('2d');
+    const doughnutChart = new Chart(doughnutChartCtx, doughnutChartConfig);
+  </script>
+
+
+
+<script>
+  $(document).ready(function() {
+   
+    function refreshEquipment() {
+      $.ajax({
+        url: '/get_equipment_data/',
+        success: function(data) {
+          $('#equipment-table-body').empty();
+          $.each(data, function(index, item) {
+            var row = '<tr>' +
+              '<td>' + item.id + '</td>' +
+              '<td>' + item.serialnumber + '</td>' +
+              '<td>' + item.code + '</td>' +
+              '<td>' + item.name + '</td>' +
+              '<td>' + item.type + '</td>' +
+              '<td>' + item.brand + '</td>' +
+              '<td>' + item.model + '</td>' +
+              '<td>' + item.totalnumber + '</td>' +
+              '<td>' + item.category + '</td>' +
+              '<td>' + item.room + '</td>' +
+              '<td><a class="" id="edit" href="/edit_equipment/' + item.id + '"><i class=" fas fa-pencil-alt"></i></a>' +
+              '<a class="m-sm-4" href="/delete_equipment/' + item.id + '"><i class=" fas fa-minus-circle fa-sm"></i></a></td>' +
+              '</tr>';
+            $('#equipment-table-body').append(row);
+          });
+        }
+      });
+    }
+
+    refreshEquipment();
+  });
+</script>
+
+</body>
+
+</html>

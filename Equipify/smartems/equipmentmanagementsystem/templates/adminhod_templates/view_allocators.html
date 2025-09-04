@@ -1,0 +1,79 @@
+{% extends "adminhod_templates/base_template.html" %}
+{% block page_title %}
+   Allocators List
+{% endblock page_title %}
+{% block main_content %}
+{% load static %}
+<div class="container-fluid">
+ <div class="container">
+
+        
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Allocators List</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>ProfilePicture</th>
+                                            <th>RegistrationNumber</th>
+                                            <th>FirstName</th>
+                                            <th>LastName</th>
+                                            
+                                            <th>Email</th>
+                                           
+                                            <th>PhoneNumber</th>
+                                            <th>Faculty</th>
+                                            <th>Speciality</th>
+                                            <th>DateJoined</th>
+                                            <th>LastLogin</th>
+                                         
+                                            
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+
+                                             {% for allocator in allocators %}
+                                             <tr>
+                                              <td>{{ allocator.admin.id }}</td>
+                                              {% if manager.profilepicture.name|lower|slice:'-4' == '.png' %}
+                                              <td><img class="rounded-circle" src="{{ allocator.profilepicture }}" style="width: 50px; height: 50px;" /></td>
+                                              {% else %}
+                                              <td><img class="rounded-circle" src="{% static "defaultprofilepicture.png" %}" style="width: 50px; height: 50px;" /></td>
+                                              {% endif %}
+                                              <td>{{ allocator.registrationnumber }}</td>
+                                             <td>{{ allocator.admin.first_name }}</td>
+                                             <td>{{ allocator.admin.last_name }}</td>
+                                             
+                                             <td>{{ allocator.admin.email }}</td>
+                                             
+                                             <td>{{ allocator.phonenumber }}</td>
+                                              <td>{{ allocator.faculty }}</td>
+                                              <td>{{ allocator.speciality }}</td>
+                                             <td>{{ allocator.admin.date_joined }}</td>
+                                             <td>{{ allocator.admin.last_login }}</td>
+                                          
+                                             
+                                             </tr>
+                                             {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+           
+
+            </div>
+          
+
+            </div>
+        </div>
+{% endblock main_content %}

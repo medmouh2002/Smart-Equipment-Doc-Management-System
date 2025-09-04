@@ -1,0 +1,139 @@
+{% extends "managerhod_templates/base_template.html" %}
+{% block page_title %}
+   Allocator List
+{% endblock page_title %}
+{% block main_content %}
+{% load static %}
+<div class="container-fluid">
+ <div class="container">
+
+        
+                    <div class="card shadow mb-4">
+                        
+                        <div class="card-header py-3">
+  
+                        <form method="get">
+                            <div class="form-row">
+                            <div class="form-group col">
+                                <label for="faculty">Faculty:</label>
+                                <select class="form-control" id="faculty" name="faculty">
+                                <option value="">All</option>
+                                {% for faculty in faculties %}
+                                <option value="{{ faculty }}" {% if faculty == selected_faculty %}selected{% endif %}>{{ faculty }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label for="speciality">Speciality:</label>
+                                <select class="form-control" id="speciality" name="speciality">
+                                <option value="">All</option>
+                                {% for speciality in specialities %}
+                                <option value="{{ speciality }}" {% if speciality == selected_speciality %}selected{% endif %}>{{ speciality }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form><br>
+                        
+                            <h6 class="m-0 font-weight-bold text-primary">Allocators List</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <a class="btn bg-dark text-white mb-3" href="/add_allocator">Add new allocator</a>
+                                <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>ProfilePicture</th>
+                                            <th>RegistrationNumber</th>
+                                            <th>FirstName</th>
+                                            <th>LastName</th>
+                                           
+                                            <th>Email</th>
+                                            <th>Username</th>
+                                            <th>PhoneNumber</th>
+                                            <th>Faculty</th>
+                                            <th>Speciality</th>
+                                            <th>DateJoined</th>
+                                            <th>LastLogin</th>
+                                            
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="14">Students</th>
+                                        </tr>
+                                        {% for student in students %}
+                                        <tr>
+                                            <td>{{ student.admin.id }}</td>
+                                            {% if manager.profilepicture.name|lower|slice:'-4' == '.png' %}
+                                            <td><img class="rounded-circle" src="{{ student.profilepicture }}" style="width: 50px; height: 50px;" /></td>
+                                            {% else %}
+                                            <td><img class="rounded-circle" src="{% static "defaultprofilepicture.png" %}" style="width: 50px; height: 50px;" /></td>
+                                            {% endif %}
+                                            <td>{{ student.registrationnumber }}</td>
+                                            <td>{{ student.admin.first_name }}</td>
+                                            <td>{{ student.admin.last_name }}</td>
+                                           
+                                            <td>{{ student.admin.email }}</td>
+                                            <td>{{ student.admin.username }}</td>
+                                            <td>{{ student.phonenumber }}</td>
+                                            <td>{{ student.faculty }}</td>
+                                            <td>{{ student.speciality }}</td>
+                                            <td>{{ student.admin.date_joined }}</td>
+                                            <td>{{ student.admin.last_login }}</td>
+    
+                                            
+                                            <td><a class="" id="edit" href="/edit_allocator/{{ student.admin.id }}"><i class=" fas fa-pencil-alt"></i></a>
+                                                <a class="m-sm-4" href="/delete_allocator/{{ student.admin.id }}"><i class=" fas fa-minus-circle fa-sm"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        
+                                        <tr>
+                                            <th colspan="14">Researchers</th>
+                                        </tr>
+                                        {% for researcher in researchers %}
+                                        <tr>
+                                            <td>{{ researcher.admin.id }}</td>
+                                            {% if manager.profilepicture.name|lower|slice:'-4' == '.png' %}
+                                            <td><img class="rounded-circle" src="{{ researcher.profilepicture }}" style="width: 50px; height: 50px;" /></td>
+                                            {% else %}
+                                            <td><img class="rounded-circle" src="{% static "defaultprofilepicture.png" %}" style="width: 50px; height: 50px;" /></td>
+                                            {% endif %}
+                                            <td>{{ researcher.registrationnumber }}</td>
+                                            <td>{{ researcher.admin.first_name }}</td>
+                                            <td>{{ researcher.admin.last_name }}</td>
+                                         
+                                            <td>{{ researcher.admin.email }}</td>
+                                            <td>{{ researcher.admin.username }}</td>
+                                            <td>{{ researcher.phonenumber }}</td>
+                                            <td>{{ researcher.faculty }}</td>
+                                            <td>{{ researcher.speciality }}</td>
+                                            <td>{{ researcher.admin.date_joined }}</td>
+                                            <td>{{ researcher.admin.last_login }}</td>
+                                            
+                                            <td><a class="" id="edit" href="/edit_allocator/{{ researcher.admin.id }}"><i class=" fas fa-pencil-alt"></i></a>
+                                                <a class="m-sm-4" href="/delete_allocator/{{ researcher.admin.id }}"><i class=" fas fa-minus-circle fa-sm"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            </div>
+        </div>
+{% endblock main_content %}

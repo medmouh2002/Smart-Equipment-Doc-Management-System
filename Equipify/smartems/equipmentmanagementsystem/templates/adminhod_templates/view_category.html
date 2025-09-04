@@ -1,0 +1,86 @@
+{% extends "adminhod_templates/base_template.html" %}
+{% block page_title %}
+   Categories List
+{% endblock page_title %}
+{% block main_content %}
+<div class="container-fluid">
+
+   
+    
+    
+
+   
+    <div class="card shadow mb-4">
+        
+        <div class="card-header py-3">
+            <form method="get">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <select class="form-control" id="name" name="name">
+                        <option value="">All</option>
+                        {% for category in categories %}
+                            <option value="{{ category.name }}" {% if selected_name == category.name %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form><br>
+            <h6 class="m-0 font-weight-bold text-primary">Categories list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <a class="btn bg-dark text-white mb-3" href="/add_category">Add new category</a>
+                <div class="form-group">
+                    {% if messages %}
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    
+                    <thead>
+                        
+                        <tr>
+            <th>Id</th>
+            
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+          </tr>
+        </thead>
+
+                                    <tbody>
+
+
+                                             {% for category in categories %}
+                                             <tr>
+                                              <td>{{ category.id }}</td>
+                                              
+                                             <td>{{ category.name }}</td>
+                                             <td>{{ category.description }}</td>
+                                             
+                                                
+                                                
+                                                <td><a class="" id="edit" href="/edit_category/{{ category.id }}"><i class=" fas fa-pencil-alt"></i></a>
+                                                    <a class="m-sm-4" href="/delete_category/{{ category.id }}"><i class=" fas fa-minus-circle fa-sm"></i></a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </thead>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                 
+    
+                </div>
+   {% endblock main_content %}

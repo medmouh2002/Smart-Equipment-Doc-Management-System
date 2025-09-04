@@ -1,0 +1,58 @@
+{% extends "managerhod_templates/base_template.html" %}
+{% block page_title %}
+   Equipment Allocation List
+{% endblock page_title %}
+{% block main_content %}
+<div class="container-fluid">
+    <div class="container">
+   
+         
+                       <div class="card shadow mb-4">
+                           
+                           <div class="card-header py-3">
+                               <h6 class="m-0 font-weight-bold text-primary">Equipments Allocation List</h6>
+                           </div>
+                           <div class="card-body">
+                               <div class="table-responsive">
+                                   <a class="btn bg-dark text-white mb-3" href="/add_allocation">Add new allocation</a>
+                                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                       <thead>
+            <tr>
+                <th>Id</th>
+                <th>Allocator</th>
+                <th>Equipment</th>
+                <th>DateTime</th>
+                <th>Deadline</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipment_allocation in equipment_allocations %}
+            <tr>
+                <td>{{ equipment_allocation.id }}</td>
+                <td>{{ equipment_allocation.allocator.fullname }}</td>
+                <td>{{ equipment_allocation.equipment.name }}</td>
+                <td>{{ equipment_allocation.start_datetime }}</td>
+                <td>{{ equipment_allocation.end_datetime }}</td>
+                <td><a class="" id="edit" href="/edit_equipment_allocation/{{ equipment_allocation.id }}"><i class=" fas fa-pencil-alt"></i></a>
+                    <a class="m-sm-4" href="/delete_allocation/{{ equipment_allocation.id }}"><i class=" fas fa-minus-circle fa-sm"></i></a>
+                </td>
+                     
+                 </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+{% endblock main_content %}

@@ -1,0 +1,113 @@
+{% extends "managerhod_templates/base_template.html" %}
+{% block page_title %}
+  Equipment List
+{% endblock page_title %}
+{% block main_content %}
+<div class="container-fluid">
+ <div class="container">
+
+        
+                    <div class="card shadow mb-4">
+                        
+                        <div class="card-header py-3">
+                            
+                            <form method="get">
+                                <div class="form-row align-items-end">
+                                  <div class="form-group col">
+                                    <label for="category">Category:</label>
+                                    <select class="form-control" id="category" name="category">
+                                      <option value="">All</option>
+                                      {% for category in categories|dictsort:"name" %}
+                                      {% if category.name != selected_category %}
+                                      <option value="{{ category.name }}">{{ category.name }}</option>
+                                      {% endif %}
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                  <div class="form-group col">
+                                    <label for="room">Room:</label>
+                                    <select class="form-control" id="room" name="room">
+                                      <option value="">All</option>
+                                      {% for room in rooms|dictsort:"name" %}
+                                      {% if room.name != selected_room %}
+                                      <option value="{{ room.name }}">{{ room.name }}</option>
+                                      {% endif %}
+                                      {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </form><br>
+                    
+                            <h6 class="m-0 font-weight-bold text-primary">Equipments List</h6>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="/export_equipment">
+                                {% csrf_token %}
+                                Please select one of the appeared options: 
+                                <label><input type="radio" name="format" value="csv"> CSV</label>
+                                <label><input type="radio" name="format" value="pdf"> PDF</label>
+                                <label><input type="radio" name="format" value="xls"> XLS</label>
+                                <label for="filename">You can choose filename if you want:</label>
+                                <input type="text" name="filename" id="filename">
+                                <button class="btn bg-dark text-white mb-3" type="submit">Export</button>
+                            </form>
+                            <div class="table-responsive">
+                                <a class="btn bg-dark text-white mb-3" href="/add_equipment">Add new equipment</a>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Serial Number</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Brand</th>
+                                            <th>Model</th>
+                                            <th>Total Number</th>
+                                            <th>Category</th>
+                                            <th>Room</th>
+                                            <th>QR Code</th>
+                                            <th>Action</th>
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="equipment-table-body">
+                                    {% for equipment in equipments %}
+                                             <tr>
+                                              <td>{{ equipment.id }}</td>
+                                             <td>{{ equipment.serialnumber }}</td>
+                                             <td>{{ equipment.code }}</td>
+                                             <td>{{ equipment.name }}</td>
+                                             <td>{{ equipment.type }}</td>
+                                             <td>{{ equipment.brand }}</td>
+                                              <td>{{ equipment.model }}</td>
+                                             <td>{{ equipment.totalnumber }}</td>
+                                             <td>{{ equipment.category_id.name }}</td>
+                                              <td>{{ equipment.room_id.name}}</td>
+                                              <td><a href="{% url 'qr_code' equipment.id %}">QR Code</a></td>
+
+                                              <td><a class="" id="edit" href="/edit_equipment/{{ equipment.id }}"><i class=" fas fa-pencil-alt"></i></a>
+                                                <a class="m-sm-4" href="/delete_equipment/{{ equipment.id }}"><i class=" fas fa-minus-circle fa-sm"></i></a>
+                                            </td>
+                                                 
+                                             </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+      
+
+            </div>
+        
+
+            </div>
+        </div>
+{% endblock main_content %}

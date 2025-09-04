@@ -1,0 +1,50 @@
+{% extends "adminhod_templates/base_template.html" %}
+
+{% block page_title %}
+   Categories List
+{% endblock page_title %}
+
+{% block main_content %}
+<div class="container-fluid">
+    <div class="container">
+   
+           
+                       <div class="card shadow mb-4">
+                           <div class="card-header py-3">
+                               <h6 class="m-0 font-weight-bold text-primary">Categories List</h6>
+                           </div>
+                           <div class="card-body">
+                               <div class="table-responsive">
+                                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                       <thead>
+                                           <tr>
+                                               <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for category in categories %}
+                                        <tr>
+                                            <td>{{ category.id }}</td>
+                                            <td>{{ category.name }}</td>
+                                            <td>{{ category.description }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+   
+                   </div>
+                  
+   
+               </div>
+               
+   
+               </div>
+           </div>
+           
+            
+   {% endblock main_content %}

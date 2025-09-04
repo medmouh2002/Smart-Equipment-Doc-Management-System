@@ -1,0 +1,67 @@
+{% extends "adminhod_templates/base_template.html" %}
+{% block page_title %}
+  Equipments List
+{% endblock page_title %}
+{% block main_content %}
+<div class="container-fluid">
+ <div class="container">
+
+         <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+
+                        <div class="card-header py-3">
+                            
+                            <h6 class="m-0 font-weight-bold text-primary">Equipments List</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Serial Number</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Brand</th>
+                                            <th>Model</th>
+                                            <th>Total Number</th>
+                                            <th>Category</th>
+                                            <th>Room</th>
+                                            
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for equipment in equipments %}
+                                             <tr>
+                                              <td>{{ equipment.id }}</td>
+                                             <td>{{ equipment.serialnumber }}</td>
+                                             <td>{{ equipment.code }}</td>
+                                             <td>{{ equipment.name }}</td>
+                                             <td>{{ equipment.type }}</td>
+                                             <td>{{ equipment.brand }}</td>
+                                              <td>{{ equipment.model }}</td>
+                                             <td>{{ equipment.totalnumber }}</td>
+                                             <td>{{ equipment.category_id.name }}</td>
+                                              <td>{{ equipment.room_id.name}}</td>
+                                            
+                                                 
+                                             </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            </div>
+        </div>
+{% endblock main_content %}

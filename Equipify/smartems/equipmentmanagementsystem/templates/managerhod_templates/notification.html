@@ -1,0 +1,96 @@
+{% load static %}
+
+<html>
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span id="notifications-counter" class="badge badge-danger badge-counter"></span>
+        </a>
+        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+            aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">
+              Notifications
+            </h6>
+            <ul class="notifications-list">
+              
+                {% if notifications %}
+                    {% for notification in notifications %}
+                        <li>{{ notification.message }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No new notifications.</li>
+                {% endif %}
+            </ul>
+        </div>
+    </li>
+
+    <script>
+        $(document).ready(function() {
+            function updateNotificationsCounter(count) {
+                if (count > 0) {
+                    $('#notifications-counter').text(count);
+                    $('#notifications-counter').show();
+                } else {
+                    $('#notifications-counter').hide();
+                }
+            }
+
+            function updateNotificationsList(notifications) {
+                var $list = $('.notifications-list');
+                $list.empty();
+
+                if (notifications.length > 0) {
+                    notifications.forEach(function(notification) {
+                        $list.append('<li>' + notification.message + '</li>');
+                    });
+                } else {
+                    $list.append('<li>No new notifications.</li>');
+                }
+            }
+
+            function fetchNotifications() {
+                $.ajax({
+                    url: '/get_notifications/',  
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        updateNotificationsCounter(response.unread_notification_count);
+                        updateNotificationsList(response.notifications);
+                    },
+                    error: function(error) {
+                        console.error('Error fetching notifications:', error);
+                    }
+                });
+            }
+
+            fetchNotifications();
+            setInterval(fetchNotifications, 5000);
+
+  
+            function markNotificationsAsRead() {
+                $.ajax({
+                    url: '/mark_notifications_as_read/',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                  
+                    },
+                    error: function(xhr, status, error) {
+               
+                    }
+                });
+            }
+
+            $('#alertsDropdown, .fa-bell').click(function() {
+                markNotificationsAsRead();
+            });
+        });
+    </script>
+</body>
+</html>

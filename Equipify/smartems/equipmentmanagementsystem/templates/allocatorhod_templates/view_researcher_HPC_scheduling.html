@@ -1,0 +1,43 @@
+{% extends "allocatorhod_templates/researcher_base_template.html" %}
+
+{% block page_title %}
+HPC Scheduling
+{% endblock page_title %}
+
+{% block main_content %}
+<div class="container-fluid">
+    <div class="container">
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">HPC Scheduling</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Equipment</th>
+                                {% for time, time_display in start_times %}
+                                    <th>{{ time_display }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in scheduling %}
+                            <tr>
+                                {% for cell in row %}
+                                    <td>{{ cell }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock main_content %}

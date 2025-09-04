@@ -1,0 +1,50 @@
+{% extends "allocatorhod_templates/student_base_template.html" %}
+{% block main_content %}
+
+                    
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Equipment Planning</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="bg-gradient-dark text-white">Equipment</th>
+                        <th class="bg-gradient-info text-white">Day</th>
+                        <th class="bg-success text-white">Start Time</th>
+                        <th class="bg-danger text-white">End Time</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equipment_planning in equipment_plannings %}
+                    <tr>
+                        <td>{{ equipment_planning.equipment.name }}</td>
+                        <td>{{ equipment_planning.get_day_display }}</td>
+                        <td>{{ equipment_planning.start_time }}</td>
+                        <td>{{ equipment_planning.end_time }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+
+{% endblock main_content %}

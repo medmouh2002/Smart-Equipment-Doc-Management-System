@@ -1,0 +1,66 @@
+{% load static %}
+<head>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    
+    <img src="{% static "whitelogo1.png" %}" alt="" >
+
+   
+    <hr class="sidebar-divider my-0">
+
+   
+    <li class="nav-item active">
+        <a class="nav-link" href="/admin_home">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/view_rooms">
+            <i class="fas fa-fw fa-warehouse"></i>
+            <span>Rooms management</span></a>
+    </li>
+
+ 
+    <li class="nav-item">
+        <a class="nav-link" href="/view_category">
+            <i class="fas fa-th"></i>
+            <span>Equipment category</span></a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link" href="/view_manager">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Managers management</span></a>
+    </li>
+    
+
+    <li class="nav-item">
+        <a class="nav-link" href="/add_new_inventory">
+            <i class="fa-solid fa-industry"></i>
+            <span>Equipment inventory</span></a>
+    </li>
+
+   
+    <li class="nav-item">
+        <a class="nav-link" href="/admin_profile">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Manage my account</span></a>
+    </li>
+
+
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+  
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+
+   
+
+</ul>

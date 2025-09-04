@@ -1,0 +1,74 @@
+{% extends "adminhod_templates/base_template.html" %}
+{% block page_title %}
+   Manager List
+{% endblock page_title %}
+{% block main_content %}
+{% load static %}
+<div class="container-fluid">
+    <div class="container">
+   
+     
+                       <div class="card shadow mb-4">
+                        
+                           <div class="card-header py-3">
+                               <h6 class="m-0 font-weight-bold text-primary">Managers List</h6>
+                           </div>
+                           <div class="card-body">
+                               <div class="table-responsive">
+                                <a class="btn bg-dark text-white mb-3" href="/add_manager">Add new manager</a>
+                                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                       <thead>
+
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>ProfilePicture</th>
+                                            <th>FirstName</th>
+                                            <th>LastName</th>
+                                            
+                                            <th>Email</th>
+                                            <th>PhoneNumber</th>
+                                            <th>DateJoined</th>
+                                            <th>LastLogin</th>
+                                           
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    {% for manager in managers %}
+                                    <tr>
+                                             <td>{{ manager.admin.id }}</td>
+                                             {% if manager.profilepicture.name|lower|slice:'-4' == '.png' %}
+                                             <td><img class="rounded-circle" src="{{ manager.profilepicture }}" style="width: 50px; height: 50px;" /></td>
+                                             {% else %}
+                                             <td><img class="rounded-circle" src="{% static "defaultprofilepicture.png" %}" style="width: 50px; height: 50px;" /></td>
+                                             {% endif %}
+                                             <td>{{ manager.admin.first_name }}</td>
+                                             <td>{{ manager.admin.last_name }}</td>
+                                             <td>{{ manager.admin.email }}</td>
+                                             <td>{{ manager.phonenumber }}</td>
+                                             <td>{{ manager.admin.date_joined }}</td>
+                                             <td>{{ manager.admin.last_login }}</td>
+                                             
+                                             <td><a class="" id="edit" href="/edit_manager/{{ manager.admin.id }}"><i class=" fas fa-pencil-alt"></i></a>
+                                                <a class="m-sm-4" href="/delete_manager/{{ manager.admin.id }}"><i class=" fas fa-minus-circle fa-sm"></i></a>
+                                            </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+   
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           
+
+        </div>
+       
+
+        </div>
+    </div>
+{% endblock main_content %}

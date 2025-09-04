@@ -1,0 +1,32 @@
+{% extends "adminhod_templates/base_template.html" %}
+{% block page_title %}
+   Edit Room 
+{% endblock page_title %}
+{% block main_content %}
+<div class="container-fluid">
+ <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+              
+                <div class="row">
+
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Edit Room Details</h1>
+                            </div>
+                            {% url 'equipmentmanagementsystem:save_edit_room' as action_path %}
+                            {% include 'adminhod_templates/form_template.html' with messages=messages form=form action_path=action_path button_text="Edit Room"  %}
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+                </div>
+{% endblock main_content %}

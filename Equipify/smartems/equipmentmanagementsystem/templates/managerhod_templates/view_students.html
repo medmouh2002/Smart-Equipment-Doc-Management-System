@@ -1,0 +1,81 @@
+{% extends "managerhod_templates/base_template.html" %}
+{% block page_title %}
+   Students List
+{% endblock page_title %}
+{% block main_content %}
+{% load static %}
+<div class="container-fluid">
+    <div class="container">
+   
+           
+                       <div class="card shadow mb-4">
+                           
+                           <div class="card-header py-3">
+                               <h6 class="m-0 font-weight-bold text-primary">Students List</h6>
+                           </div>
+                           <div class="card-body">
+                               <div class="table-responsive">
+                                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                       <thead>
+            <tr>
+                <th>Id</th>
+                                            <th>ProfilePicture</th>
+                                            <th>RegistrationNumber</th>
+                                            <th>FirstName</th>
+                                            <th>LastName</th>
+                                            
+                                            <th>Email</th>
+                                           
+                                            <th>PhoneNumber</th>
+                                            <th>Faculty</th>
+                                            <th>Speciality</th>
+                                            <th>DateJoined</th>
+                                            <th>LastLogin</th>
+                                      
+                                       
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                  
+                                        {% for student in students %}
+                                        <tr>
+                                            <td>{{ student.admin.id }}</td>
+                                            {% if manager.profilepicture.name|lower|slice:'-4' == '.png' %}
+                                            <td><img class="rounded-circle" src="{{ student.profilepicture }}" style="width: 50px; height: 50px;" /></td>
+                                            {% else %}
+                                            <td><img class="rounded-circle" src="{% static "defaultprofilepicture.png" %}" style="width: 50px; height: 50px;" /></td>
+                                            {% endif %}
+                                            <td>{{ student.registrationnumber }}</td>
+                                            <td>{{ student.admin.first_name }}</td>
+                                            <td>{{ student.admin.last_name }}</td>
+                                        
+                                            <td>{{ student.admin.email }}</td>
+                                          
+                                            <td>{{ student.phonenumber }}</td>
+                                            <td>{{ student.faculty }}</td>
+                                            <td>{{ student.speciality }}</td>
+                                            <td>{{ student.admin.date_joined }}</td>
+                                            <td>{{ student.admin.last_login }}</td>
+    
+                                           
+                                        </tr>
+                                        {% endfor %}
+                                        
+                                       
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            </div>
+        </div>
+{% endblock main_content %}

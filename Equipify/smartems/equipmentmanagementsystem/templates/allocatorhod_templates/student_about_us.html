@@ -1,0 +1,118 @@
+
+{% block main_content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>About Us</title>
+  <style>
+    /* Customize the page styles here */
+    /* For example, you can add some padding or margins to elements */
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <a href="/student_home">
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <img class="me-5" src="{% static "whitelogo1.png" %}"  alt="" width="200px" height="ml-auto" >
+</nav>
+</a>
+
+  <!-- Page Content -->
+  <div class="container mt-4">
+
+    <img class="mb-5 mt-3 rounded" src="{% static "about us pic.png" %}" alt="" width="1100px" height="ml-auto">
+    <h1>Equipify: University Equipment Management System</h1>
+    <br>
+    <p class="h5">Equipify is an advanced and user-friendly system designed to streamline the management of equipment 
+        within universities. With its robust features and intuitive interface,
+         Equipify empowers students and researchers to efficiently allocate, track,
+         and utilize various equipment resources across campus. By leveraging cutting-edge
+         technology, Equipify aims to enhance the accessibility, organization, and utilization of equipment,
+         ultimately supporting academic and research endeavors.</p>
+         <br>
+         <h1>The features : </h1>
+         <h1>Equipment Inventory:</h1>
+         <br>
+         <img class="mb-5 mt-2 rounded" src="{% static "inventory.png" %}" alt="" width="1100px" height="ml-auto">
+          <br>
+          <ul class="list-group">
+            <li class=" h5">Equipify provides a comprehensive inventory system that catalogs all university equipment, including scientific instruments, lab apparatus, computing devices, and more.</li>
+            <li class="h5">Each equipment entry contains relevant details such as specifications, availability, condition, and usage guidelines.</li>
+            
+          </ul>
+          <br>
+          <h1>Reservation and Allocation:</h1>
+         <br>
+         <img class="mb-5 mt-2 rounded" src="{% static "allocation.png" %}" alt="" width="1100px" height="ml-auto">
+          <br>
+          <ul class="list-group">
+            <li class=" h5">Students and researchers can easily access Equipify to reserve specific equipment for their academic or research purposes.</li>
+            <li class=" h5">The system offers an intuitive reservation interface, allowing users to select desired dates, durations, and equipment options.</li>
+            <li class=" h5">Equipify ensures efficient allocation, preventing conflicts or double bookings, and optimizing equipment utilization across departments.</li>
+
+          </ul>
+
+        <br>
+        <h1>Availability Tracking:</h1>
+         <br>
+         <img class="mb-5 mt-2 rounded" src="{% static "tracking.png" %}" alt="" width="1100px" height="ml-auto">
+          <br>
+          <ul class="list-group">
+            <li class=" h5">Equipify includes real-time tracking of equipment availability, displaying current status and upcoming reservations.</li>
+            <li class=" h5">Users can view equipment calendars to identify time slots when specific items are free for use.</li>
+            <li class=" h5">This feature eliminates the need for manual inquiries, saving time and reducing administrative burdens.</li>
+
+          </ul>
+<br>
+          <h1>Notifications and Reminders:</h1>
+         <br>
+         <img class="mb-5 mt-2 rounded" src="{% static "notification.png" %}"  alt="" width="1100px" height="ml-auto">
+          <br>
+          <ul class="list-group">
+            <li class=" h5">Equipify sends automated notifications and reminders to users regarding upcoming reservations, return deadlines, and equipment maintenance schedules.</li>
+            <li class=" h5">Users receive timely alerts, ensuring they can plan accordingly and avoid any disruptions in their work.</li>
+
+          </ul>
+          <br> 
+          <h1>Usage Analytics:</h1>
+         <br>
+         <img class="mb-5 mt-2 rounded" src="{% static "ipad.png" %}" alt="" width="1100px" height="ml-auto">
+          <br>
+          <ul class="list-group">
+            <li class=" h5">The system provides administrators with insightful analytics on equipment usage, helping them identify popular resources, assess demand patterns, and make informed decisions regarding equipment allocation and procurement.</li>
+
+
+          </ul>
+          <br> 
+          <h2>Benefits</h2>
+         <br>
+          <ul class="list-group mb-5">
+            <li class=" h5">Improved Efficiency: Equipify streamlines the process of equipment allocation, reducing manual paperwork, and administrative overhead. This efficiency allows users to focus more on their academic or research pursuits.</li>
+            <li class=" h5">Enhanced Collaboration: The system fosters collaboration between students and researchers by facilitating the sharing and reservation of equipment, promoting interdisciplinary work and knowledge exchange.</li>
+            <li class=" h5">Optimal Resource Utilization: Equipify enables administrators to track and optimize equipment usage, ensuring that valuable resources are utilized effectively and efficiently.</li>
+            <li class=" h5">Transparent and Equitable Access: The system provides a fair and transparent platform for all users, ensuring equal opportunities to access and utilize university equipment resources.</li>
+            <li class=" h5">Maintenance and Compliance: Equipify assists in scheduling maintenance tasks and tracking compliance with safety regulations, promoting equipment longevity and ensuring a safe working environment.</li>
+
+
+          </ul>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 ">
+    <p>&copy; 2023 Equipify. All rights reserved.</p>
+  </footer>
+ 
+  <!-- Bootstrap JS (place it before the closing body tag for faster page loading) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+{% endblock main_content %}

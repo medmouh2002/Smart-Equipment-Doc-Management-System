@@ -1,0 +1,93 @@
+{% extends "adminhod_templates/base_template.html" %}
+{% block page_title %}
+   Rooms List
+{% endblock page_title %}
+{% block main_content %}
+<div class="container-fluid">
+ <div class="container">
+
+        
+                    <div class="card shadow mb-4">
+                       
+                        <div class="card-header py-3">
+                          <form method="get">
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <label for="name">Name:</label>
+                                    <select class="form-control" id="name" name="name">
+                                        <option value="">All</option>
+                                        {% for room in rooms %}
+                                            <option value="{{ room.name }}" {% if selected_name == room.name %}selected{% endif %}>{{ room.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="location">Location:</label>
+                                    <select class="form-control" id="location" name="location">
+                                        <option value="">All</option>
+                                        {% for room in rooms %}
+                                            <option value="{{ room.location }}" {% if selected_location == room.location %}selected{% endif %}>{{ room.location }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </form><br>
+                            <h6 class="m-0 font-weight-bold text-primary">Rooms List</h6>
+                        </div>
+                        <div class="card-body">
+                            
+                            <div class="table-responsive">
+                                <a class="btn bg-dark text-white mb-3" href="/add_room">Add new room</a>
+                                {% if messages %}
+                                {% for message in messages %}
+                                  {% if message.tags == 'error' %}
+                                    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                                  {% endif %}
+                                  {% if message.tags == 'success' %}
+                                    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                                  {% endif %}
+                                {% endfor %}
+                              {% endif %}
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    
+                                    <thead>
+                                       
+                                        <tr><th>Id</th><th>Name</th>
+                                            <th>Location</th>
+                                            <th>Capacity</th>
+                                            <th>Action</th>
+          </tr>
+        </thead>
+
+                                    <tbody>
+
+
+                                             {% for room in rooms %}
+                                             <tr>
+                                              <td>{{ room.id }}</td>
+                                              
+                                             <td>{{ room.name }}</td>
+                                             <td>{{ room.location }}</td>
+                                             <td>{{ room.capacity }}</td>
+                                             <td><a class="" id="edit" href="/edit_room/{{ room.id }}"><i class=" fas fa-pencil-alt"></i></a>
+                                                <a class="m-sm-4" href="/delete_room/{{ room.id }}"><i class=" fas fa-minus-circle fa-sm"></i></a>
+                                            </td>
+                                                </tr>
+                                                {% endfor %}
+                                       </tbody>
+   
+                                   </table>
+                               </div>
+                           </div>
+                       </div>
+   
+                   </div>
+          
+   
+               </div>
+           
+   
+               </div>
+           </div>
+   {% endblock main_content %}
